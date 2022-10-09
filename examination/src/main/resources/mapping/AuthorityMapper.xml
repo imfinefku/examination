@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.dao.AuthorityMapper">
+    <insert id="addRole" parameterType="com.study.bean.Role">
+		insert into authority_role(id,name,description,createtime)
+		values(#{id},#{name},#{description},#{createtime})
+	</insert>
+
+    <update id="updateRole" parameterType="com.study.bean.Role">
+		update authority_role
+		set name=#{name},description=#{description}
+		where id=#{id}
+	</update>
+
+    <delete id="deleteRole">
+		delete
+		from authority_role
+		where id=#{id}
+	</delete>
+
+    <select id="getRolePage" resultType="com.study.bean.Role">
+		select *
+		from authority_role
+		order by createtime
+		limit #{start},#{limit}
+	</select>
+
+    <select id="getRoleCount" resultType="Integer">
+		select count(*)
+		from authority_role
+	</select>
+
+    <select id="getRoleAll" resultType="com.study.bean.Role">
+		select *
+		from authority_role
+		order by createtime
+	</select>
+
+    <insert id="addMenu" parameterType="com.study.bean.Menu">
+		insert into authority_menu(id,name,icon,hidden,sort,masterid,route,createtime)
+		values(#{id},#{name},#{icon},#{hidden},#{sort},#{masterid},#{route},#{createtime})
+	</insert>
+
+    <update id="updateMenu" parameterType="com.study.bean.Menu">
+		update authority_menu
+		set name=#{name},icon=#{icon},hidden=#{hidden},
+		sort=#{sort},masterid=#{masterid},route=#{route}
+		where id=#{id}
+	</update>
+
+    <delete id="deleteMenu">
+		delete
+		from authority_menu
+		where id=#{id}
+	</delete>
+
+    <select id="getMenu" resultType="com.study.bean.Menu">
+		select m1.*,m2.name mastername
+		from authority_menu m1
+		left join authority_menu m2
+		on m1.masterid=m2.id
+		order by sort desc
+	</select>
+
+    <select id="getTopLevelMenuAll" resultType="com.study.bean.Menu">
+		select id,name,route,icon,sort
+		from authority_menu
+		where masterid is null or masterid=''
+		order by sort desc
+	</select>
+
+    <select id="getChildrenMenuTree" resultType="com.study.bean.MenuTree">
+		select id,name,route,icon,sort
+		from authority_menu
+		where masterid=#{masterid}
+		order by sort desc
+	</select>
+
+    <select id="getRoleMenu" resultType="com.study.bean.RoleMenu">
+		select menuid
+		from authority_role_menu
+		where roleid=#{roleid}
+		and status=#{status}
+	</select>
+
+    <delete id="deleteRoleMenu">
+		delete
+		from authority_role_menu
+		where roleid=#{roleid}
+	</delete>
+
+    <insert id="addRoleMenuList">
+        insert into authority_role_menu (id,roleid,menuid,status,createtime)
+        values
+        <foreach collection="list" item="item" separator="," index="index">
+            (#{item.id},#{item.roleid},#{item.menuid},#{item.status},#{item.createtime})
+        </foreach>
+    </insert>
+
+    <insert id="addUser" parameterType="com.study.bean.User">
+		insert into authority_user (id,name,username,password,createtime,lastlogintime,departmentid)
+		values (#{id},#{name},#{username},#{password},#{createtime},#{lastlogintime},#{departmentid})
+	</insert>
+
+    <update id="updateUser" parameterType="com.study.bean.User">
+		update authority_user
+		set name=#{name},password=#{password},departmentid=#{departmentid}
+		where id=#{id}
+	</update>
+
+    <insert id="addUserRole">
+        insert into authority_user_role (id,userid,roleid,createtime)
+        values
+        <foreach collection="list" item="item" separator="," index="index">
+            (#{item.id},#{item.userid},#{item.roleid},#{item.createtime})
+        </foreach>
+    </insert>
+
+    <select id="getUserPage" resultType="com.study.bean.User">
+		select u.*,d.name departmentname
+		from authority_user u
+		left join authority_department d
+		on u.departmentid=d.id
+		order by createtime
+		limit #{start},#{limit}
+	</select>
+
+    <select id="getUserRoleByUserid" resultType="com.study.bean.UserRole">
+		select *
+		from authority_user_role
+		where userid=#{userid}
+	</select>
+
+    <delete id="deleteUser">
+		delete
+		from authority_user
+		where id=#{id}
+	</delete>
+
+    <delete id="deleteUserRole">
+		delete
+		from authority_user_role
+		where userid=#{userid}
+	</delete>
+
+    <select id="getUserCount" resultType="Integer">
+		select count(*)
+		from authority_user
+	</select>
+
+    <select id="getUserByUsernamePassword" resultType="com.study.bean.User">
+		select id,name
+		from authority_user
+		where username=#{username}
+		and password=#{password}
+	</select>
+
+    <update id="updateLastLoginTime">
+		update authority_user
+		set lastlogintime = #{lastlogintime}
+		where id=#{id}
+	</update>
+
+    <select id="getTopLevelMenuByUser" resultType="com.study.bean.Menu">
+		select distinct id,name,route,icon,sort
+		from authority_menu
+		where id in (
+			select rm.menuid
+			from authority_user u,authority_user_role ur,authority_role_menu rm
+			where u.id=#{userid}
+			and u.id=ur.userid
+			and ur.roleid=rm.roleid
+		)
+		and (masterid is null or masterid='')
+		order by sort desc
+	</select>
+
+    <update id="updatePassword">
+		update authority_user
+		set password=#{newPassword}
+		where id=#{id}
+	</update>
+
+    <select id="getUserById" resultType="com.study.bean.User">
+		select *
+		from authority_user
+		where id=#{id}
+	</select>
+
+    <select id="checkUsernameRepeat" resultType="Integer">
+		select count(*)
+		from authority_user
+		where username=#{username}
+	</select>
+
+    <insert id="addDepartment" parameterType="com.study.bean.Department">
+		insert into authority_department(id,name,sort,masterid,createtime)
+		values(#{id},#{name},#{sort},#{masterid},#{createtime})
+	</insert>
+
+    <update id="updateDepartment" parameterType="com.study.bean.Department">
+		update authority_department
+		set name=#{name},sort=#{sort},masterid=#{masterid}
+		where id=#{id}
+	</update>
+
+    <delete id="deleteDepartment">
+		delete
+		from authority_department
+		where id=#{id}
+	</delete>
+
+	<select id="getDepartmentAll" resultType="com.study.bean.Department">
+		select a.*,m.name mastername
+		from authority_department a
+		left join authority_department m
+		on a.masterid=m.id
+		order by a.sort desc
+	</select>
+
+</mapper>

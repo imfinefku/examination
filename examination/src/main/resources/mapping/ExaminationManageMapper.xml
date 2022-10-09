@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.dao.ExaminationManageMapper">
+
+    <insert id="addSubject" parameterType="com.study.bean.Subject">
+		insert into examination_subject(id,name,createtime)
+		values(#{id},#{name},#{createtime})
+	</insert>
+
+    <update id="updateSubject" parameterType="com.study.bean.Subject">
+		update examination_subject
+		set name=#{name}
+		where id=#{id}
+	</update>
+
+    <delete id="deleteSubject">
+		delete
+		from examination_subject
+		where id=#{id}
+	</delete>
+
+    <select id="getSubjectPage" resultType="com.study.bean.Subject">
+		select *
+		from examination_subject
+		order by createtime
+		limit #{start},#{limit}
+	</select>
+
+    <select id="getSubjectCount" resultType="Integer">
+		select count(*)
+		from examination_subject
+	</select>
+
+    <select id="getSubjectAll" resultType="com.study.bean.Subject">
+		select *
+		from examination_subject
+		order by createtime
+	</select>
+
+	<insert id="addQuestion" parameterType="com.study.bean.Question">
+		insert into examination_question(id,content,type,subject,a,b,c,d,imgurl,analysis,answer,createtime)
+		values(#{id},#{content},#{type},#{subject},#{a},#{b},#{c},#{d},#{imgurl},#{analysis},#{answer},#{createtime})
+	</insert>
+
+	<update id="updateQuestion" parameterType="com.study.bean.Question">
+		update examination_question
+		set content=#{content},type=#{type},subject=#{subject},a=#{a},b=#{b},c=#{c},
+		d=#{d},imgurl=#{imgurl},analysis=#{analysis},answer=#{answer}
+		where id=#{id}
+	</update>
+
+	<delete id="deleteQuestion">
+		delete
+		from examination_question
+		where id=#{id}
+	</delete>
+
+	<select id="getQuestionPage" resultType="com.study.bean.Question">
+		select q.*,s.name subjectName
+		from examination_question q
+		left join examination_subject s
+		on q.subject=s.id
+		order by q.createtime
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getQuestionByTestPaper" resultType="com.study.bean.Question">
+		select q.*
+		from examination_testpaper t, examination_testpaper_question tq,examination_question q
+		where t.id=#{id}
+		and tq.testpaper=t.id
+		and tq.question=q.id
+		order by tq.sort
+	</select>
+
+	<select id="getQuestionCount" resultType="Integer">
+		select count(*)
+		from examination_question
+	</select>
+
+	<insert id="addTestPaper">
+		insert into examination_testpaper (id,name,subject,xznum,pdnum,jdnum,score,time,createtime)
+		values(#{id},#{name},#{subject},#{xznum},#{pdnum},#{jdnum},#{score},#{time},#{createtime})
+	</insert>
+
+	<insert id="addTestPaperQuestionList">
+		insert into examination_testpaper_question (id,type,testpaper,question,sort,createtime)
+		values
+		<foreach collection="list" item="item" separator="," index="index">
+			(#{item.id},#{item.type},#{item.testpaper},#{item.question},#{item.sort},#{item.createtime})
+		</foreach>
+	</insert>
+
+	<delete id="deleteTestPaper">
+		delete
+		from examination_testpaper
+		where id=#{id}
+	</delete>
+
+	<delete id="deleteTestPaperQuestion">
+		delete
+		from examination_testpaper_question
+		where testpaper=#{testpaper}
+	</delete>
+
+	<update id="updateTestPaper">
+		update examination_testpaper
+		set	name=#{name},subject=#{subject},xznum=#{xznum},
+		pdnum=#{pdnum},jdnum=#{jdnum},score=#{score},time=#{time}
+		where id=#{id}
+	</update>
+
+	<select id="getTestPaperPage" resultType="com.study.bean.TestPaper">
+		select t.*,s.name subjectName
+		from examination_testpaper t
+		left join examination_subject s
+		on t.subject=s.id
+		order by t.createtime
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getTestPaperCount" resultType="Integer">
+		select count(*)
+		from examination_testpaper
+	</select>
+
+	<select id="getTestPaperById" resultType="com.study.bean.TestPaper">
+		select t.*,s.name subjectName
+		from examination_testpaper t
+		left join examination_subject s
+		on t.subject=s.id
+		where t.id=#{id}
+	</select>
+
+	<select id="getQuestionByTestPaperId" resultType="com.study.bean.TestPaperQuestion">
+		select tq.*,q.content content,s.name subjectName
+		from examination_testpaper_question tq,examination_testpaper t,
+		examination_question q,examination_subject s
+		where tq.testpaper=t.id
+		and tq.question=q.id
+		and q.subject=s.id
+		and t.id=#{id}
+		order by tq.sort
+	</select>
+
+	<select id="getTestPagerAll" resultType="com.study.bean.TestPaper">
+		select id,name
+		from examination_testpaper
+	</select>
+
+	<insert id="addExamination">
+		insert into examination_examination(id,name,testpaper,qualifiedscore,type,password,createtime)
+		values(#{id},#{name},#{testpaper},#{qualifiedscore},#{type},#{password},#{createtime})
+	</insert>
+
+	<delete id="deleteExamination">
+		delete
+		from examination_examination
+		where id=#{id}
+	</delete>
+
+	<update id="updateExamination">
+		update examination_examination
+		set name=#{name},testpaper=#{testpaper},qualifiedscore=#{qualifiedscore},
+		type=#{type},password=#{password}
+		where id=#{id}
+	</update>
+
+	<select id="getExaminationPage" resultType="com.study.bean.Examination">
+		select e.*,t.name testPapername
+		from examination_examination e,examination_testpaper t
+		where e.testpaper=t.id
+		order by e.createtime
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getExaminationCount" resultType="Integer">
+		select count(*)
+		from examination_examination
+	</select>
+
+	<select id="getOnlineExaminationPage" resultType="com.alibaba.fastjson.JSONObject">
+		select e.id,e.name,e.type,e.qualifiedscore,t.id testpaper,t.time,t.score,s.name subjectName
+		from examination_examination e
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		order by e.createtime
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getOnlineExaminationCount" resultType="Integer">
+		select count(*)
+		from examination_examination
+	</select>
+
+	<select id="getExaminationById" resultType="com.study.bean.Examination">
+		select *
+		from examination_examination
+		where id=#{id}
+	</select>
+
+	<insert id="addExaminationUserJoin">
+		insert into examination_user_join(id,userid,examination,testpaper,starttime,endtime,type,score)
+		values(#{id},#{userid},#{examination},#{testpaper},#{starttime},#{endtime},#{type},#{score})
+	</insert>
+
+	<select id="getExaminationUserJoinById" resultType="com.study.bean.ExaminationUserJoin">
+		select *
+		from examination_user_join
+		where id=#{id}
+	</select>
+
+	<select id="getQuestionListByTestPaperId" resultType="com.study.bean.Question">
+		select q.*
+		from examination_testpaper t,examination_testpaper_question tq,examination_question q
+		where t.id=#{testpaper}
+		and t.id=tq.testpaper
+		and tq.question=q.id
+		order by tq.sort
+	</select>
+
+	<insert id="addExaminationUserJoinInfoList">
+		insert into examination_user_join_info (id,masterid,question,reply,correctScore)
+		values
+		<foreach collection="list" item="item" separator="," index="index">
+			(#{item.id},#{item.masterid},#{item.question},#{item.reply},#{item.correctScore})
+		</foreach>
+	</insert>
+
+	<update id="updateExaminationUserJoinType">
+		update examination_user_join
+		set type=#{dtype}
+		where id=#{joinid}
+		and type=#{otype}
+	</update>
+
+	<select id="getMyScorePage" resultType="com.alibaba.fastjson.JSONObject">
+		select euj.id joinid,euj.starttime time,u.name username,e.name,euj.type,e.qualifiedscore,t.id testpaper,t.score,s.name subjectName,euj.score myScore
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where u.id=#{userid}
+		order by euj.starttime desc
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getMyScoreCount" resultType="Integer">
+		select count(*)
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where u.id=#{userid}
+		order by euj.starttime
+	</select>
+
+	<select id="getTestPaperCorrectionPage" resultType="com.alibaba.fastjson.JSONObject">
+		select euj.id,euj.starttime time,u.name username,e.name,e.type,e.qualifiedscore,t.id testpaper,t.score,s.name subjectName
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where u.id=#{userid}
+		and euj.type=1
+		order by euj.starttime
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getTestPaperCorrectionCount" resultType="Integer">
+		select count(*)
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where u.id=#{userid}
+		and euj.type=1
+	</select>
+
+	<select id="getTestPaperCorrectionQuestion" resultType="com.study.bean.Question">
+		select q.*,euji.reply,euji.correctScore
+		from examination_user_join euj,examination_user_join_info euji,
+		examination_question q,examination_testpaper t,
+		examination_testpaper_question tq
+		where euj.id=euji.masterid
+		and euji.question=q.id
+		and euj.id=#{joinid}
+		and euj.testpaper=t.id
+		and tq.testpaper=t.id
+		and tq.question=euji.question
+		order by tq.sort
+	</select>
+
+	<update id="updateExaminationUserJoinInfo">
+		update examination_user_join_info
+		set reply=#{reply},correctScore=#{correctScore}
+		where masterid=#{masterid}
+		and question=#{question}
+	</update>
+
+	<update id="updateExaminationUserJoinScore">
+		update examination_user_join
+		set score=#{score}
+		where id=#{joinid}
+	</update>
+
+	<select id="getQuestionCountBySubject" resultType="Integer">
+		select count(*)
+		from examination_question
+		where subject=#{subject}
+	</select>
+
+	<select id="getTestPaperCountByQuestion" resultType="Integer">
+		select count(*)
+		from examination_testpaper_question
+		where question=#{question}
+	</select>
+
+	<select id="getExaminationCountByTestpaper" resultType="Integer">
+		select count(*)
+		from examination_examination
+		where testpaper=#{testpaper}
+	</select>
+
+	<select id="getUserjoinCountByExamination" resultType="Integer">
+		select count(*)
+		from examination_user_join
+		where examination=#{examination}
+	</select>
+
+	<select id="getQuestionById" resultType="com.study.bean.Question">
+		select *
+		from examination_question
+		where id=#{id}
+	</select>
+
+	<select id="getReportByExaminationIdPage" resultType="com.alibaba.fastjson.JSONObject">
+		select euj.id joinid,euj.starttime time,u.name username,e.name,euj.type,e.qualifiedscore,t.id testpaper,t.score,s.name subjectName,euj.score myScore
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where e.id=#{id}
+		order by euj.score desc
+		limit #{start},#{limit}
+	</select>
+
+	<select id="getReportByExaminationIdCount" resultType="Integer">
+		select count(*)
+		from examination_user_join euj
+		left join examination_examination e
+		on euj.examination=e.id
+		left join examination_testpaper t
+		on e.testpaper=t.id
+		left join examination_subject s
+		on t.subject=s.id
+		left join authority_user u
+		on euj.userid=u.id
+		where e.id=#{id}
+	</select>
+</mapper>
