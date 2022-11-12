@@ -20,11 +20,8 @@
 题型支持：目前暂时支持单选题、判断题、简答题。<br>
 自动批改：对于单选题和判断题，系统会自动进行批改，简答题需要人工批改。<br>
 
-## 定制开发
+## 技术学习
 
-如果开源版本无法满足您的要求，或者有其他项目需求，都可以加本人微信进行定制开发
-<img src="https://xuezhabiji.com/images/mine.jpg" width="200" height="200" /><br>
-也可以访问本人个人博客，上面有更多的案例展示。https://xuezhabiji.com <br>
 更多学习资料可以关注本人的微信公众号和Java面试题小程序<br>
 <img src="https://xuezhabiji.com/images/gongzhonghao.jpg" width="200" height="200" />
 <img src="https://xuezhabiji.com/images/xiaochengxu.jpg" width="200" height="200" />
