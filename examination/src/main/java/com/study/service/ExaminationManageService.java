@@ -8,8 +8,6 @@ import com.study.enums.PassType;
 import com.study.enums.QuestionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -51,9 +49,6 @@ public class ExaminationManageService {
 
     public TestPaper getTestPaperById(String id) {
         TestPaper testPaper = examinationManageMapper.getTestPaperById(id);
-        if (testPaper != null) {
-            testPaper.setTestPaperQuestionList(examinationManageMapper.getQuestionByTestPaperId(id));
-        }
         return testPaper;
     }
 
@@ -126,15 +121,8 @@ public class ExaminationManageService {
                 json.put("pass", ExaminationUserJoinType.YIJIAOJUAN.getName());
                 json.put("color",PassType.DEFAULT.getColor());
             } else if (ExaminationUserJoinType.YIPIGAI.getType() == type) {
-                int qualifiedscore = Integer.parseInt(json.getString("qualifiedscore"));
-                int myScore = Integer.parseInt(json.getString("myScore"));
-                if (myScore>=qualifiedscore){
-                    json.put("pass", PassType.PASS.getName());
-                    json.put("color",PassType.PASS.getColor());
-                }else{
-                    json.put("pass", PassType.NOPASS.getName());
-                    json.put("color",PassType.NOPASS.getColor());
-                }
+                json.put("pass", PassType.PASS.getName());
+                json.put("color",PassType.PASS.getColor());
             }
         }
     }

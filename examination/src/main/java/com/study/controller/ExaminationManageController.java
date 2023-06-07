@@ -196,7 +196,6 @@ public class ExaminationManageController {
         }
         TestPaper testPaper = examinationManageService.getTestPaperById(examinationUserJoin.getTestpaper());
         List<Question> questionList = examinationManageService.getQuestionListByTestPaperId(testPaper.getId());
-        testPaper.setQuestionList(questionList);
         return CommonResult.success(testPaper);
     }
 
@@ -250,7 +249,6 @@ public class ExaminationManageController {
         ExaminationUserJoin examinationUserJoin = examinationManageService.getExaminationUserJoinById(joinid);
         TestPaper testPaper = examinationManageService.getTestPaperById(examinationUserJoin.getTestpaper());
         List<Question> questionList = examinationManageService.getTestPaperCorrectionQuestion(joinid);
-        testPaper.setQuestionList(questionList);
         return CommonResult.success(testPaper);
     }
 
@@ -265,7 +263,6 @@ public class ExaminationManageController {
     public CommonResult getTestPaperById(@RequestParam String id) {
         TestPaper testPaper = examinationManageService.getTestPaperById(id);
         List<Question> questionList = examinationManageService.getQuestionByTestPaper(id);
-        testPaper.setQuestionList(questionList);
         return CommonResult.success(testPaper);
     }
 

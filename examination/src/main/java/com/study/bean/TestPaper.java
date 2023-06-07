@@ -35,10 +35,6 @@ public class TestPaper {
 
     private Date createtime;
 
-    private List<TestPaperQuestion> testPaperQuestionList;
-
-    private List<Question> questionList;
-
     public String getId() {
         return id;
     }
@@ -119,22 +115,6 @@ public class TestPaper {
         this.createtime = createtime;
     }
 
-    public List<TestPaperQuestion> getTestPaperQuestionList() {
-        return testPaperQuestionList;
-    }
-
-    public void setTestPaperQuestionList(List<TestPaperQuestion> testPaperQuestionList) {
-        this.testPaperQuestionList = testPaperQuestionList;
-    }
-
-    public List<Question> getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
     @Override
     public String toString() {
         return "TestPaper{" +
@@ -148,8 +128,6 @@ public class TestPaper {
                 ", score=" + score +
                 ", time=" + time +
                 ", createtime=" + createtime +
-                ", testPaperQuestionList=" + testPaperQuestionList +
-                ", questionList=" + questionList +
                 '}';
     }
 }

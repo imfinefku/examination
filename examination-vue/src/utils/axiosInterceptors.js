@@ -36,12 +36,9 @@ axios.interceptors.response.use(
   function (response) {
     loading.close();
     if (response.data.code == "401") {
-      Message.error({message:'暂未登录或token已经过期'});
-      router.replace({
-        path: '/'
-      });
+      Message.error({message:"数据库初始化失败，请检查"});
     }else if (response.data.code != "200"){
-      Message.error({message:response.data.message});
+      Message.error({message:"数据库初始化失败，请检查"});
     }
     //响应数据
     return response;
@@ -49,7 +46,7 @@ axios.interceptors.response.use(
   function (error) {
     //响应错误
     loading.close();
-    Message.error({message:"响应错误"});
+    Message.error({message:"数据库初始化失败，请检查"});
     return Promise.reject(error);
   }
 )

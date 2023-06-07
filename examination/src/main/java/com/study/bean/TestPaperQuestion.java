@@ -9,8 +9,6 @@ public class TestPaperQuestion {
 
     private String id;
 
-    private String testpaper;
-
     private String question;
 
     private String content;
@@ -29,14 +27,6 @@ public class TestPaperQuestion {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTestpaper() {
-        return testpaper;
-    }
-
-    public void setTestpaper(String testpaper) {
-        this.testpaper = testpaper;
     }
 
     public String getQuestion() {
@@ -91,7 +81,6 @@ public class TestPaperQuestion {
     public String toString() {
         return "TestPaperQuestion{" +
                 "id='" + id + '\'' +
-                ", testpaper='" + testpaper + '\'' +
                 ", question='" + question + '\'' +
                 ", content='" + content + '\'' +
                 ", type='" + type + '\'' +

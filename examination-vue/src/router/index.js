@@ -10,16 +10,8 @@ import userManage from '@/components/userManage.vue'
 import roleManage from '@/components/roleManage.vue'
 import managerConsole from '@/components/service/managerConsole.vue'
 import examinationManage from '@/components/service/examinationManage.vue'
-import examinationManage2 from '@/components/service/examinationManage2.vue'
 import subjectManage from '@/components/service/subjectManage.vue'
-import questionManage from '@/components/service/questionManage.vue'
-import testpaperManage from '@/components/service/testpaperManage.vue'
-import testpaperCorrection from '@/components/service/testpaperCorrection.vue'
 import myExamination from '@/components/service/myExamination.vue'
-import examOnline from '@/components/service/examOnline.vue'
-import myScore from '@/components/service/myScore.vue'
-import testpaperAdd from '@/components/service/testpaperAdd.vue'
-
 Vue.use(Router)
 
 export default new Router({
@@ -94,39 +86,6 @@ export default new Router({
               meta: {
                 title: "科目管理"
               }
-            },
-            {
-              path: 'questionManage',
-              component: questionManage,
-              meta: {
-                title: "试题管理"
-              }
-            },
-            {
-              path: 'testpaperManage',
-              component: testpaperManage,
-              meta: {
-                title: "试卷管理"
-              }
-            },{
-              path: 'testpaperAdd',
-              component: testpaperAdd,
-              meta: {
-                title: "试卷编制"
-              }
-            },{
-              path: 'examinationManage2',
-              component: examinationManage2,
-              meta: {
-                title: "考试管理"
-              }
-            },
-            {
-              path: 'testpaperCorrection',
-              component: testpaperCorrection,
-              meta: {
-                title: "试卷批改"
-              }
             }
           ]
         },{
@@ -134,23 +93,7 @@ export default new Router({
           component: myExamination,
           meta: {
             title: "我的考试"
-          },
-          children: [
-            {
-              path: 'examOnline',
-              component: examOnline,
-              meta: {
-                title: "在线考试"
-              }
-            },
-            {
-              path: 'myScore',
-              component: myScore,
-              meta: {
-                title: "我的成绩"
-              }
-            }
-          ]
+          }
         }
       ]
     }

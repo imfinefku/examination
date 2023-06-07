@@ -33,12 +33,6 @@ public class AuthorityService {
     public List<Menu> getMenu() {
         List<Menu> allMenuList = authorityMapper.getMenu();
         List<Menu> topMenuList = new ArrayList<Menu>();
-        //获取所有顶级菜单
-        for (Menu menu : allMenuList) {
-            if (menu.getMasterid() == null || "".equals(menu.getMasterid())) {
-                topMenuList.add(menu);
-            }
-        }
         setChildrenMenu(topMenuList, allMenuList);
         return topMenuList;
     }
@@ -47,15 +41,6 @@ public class AuthorityService {
         //给所有上级菜单赋予子级菜单
         for (Menu menu : topMenuList) {
             List<Menu> children = new ArrayList<Menu>();
-            for (Menu childMenu : allMenuList) {
-                if (childMenu.getMasterid() != null && menu.getId().equals(childMenu.getMasterid())) {
-                    children.add(childMenu);
-                }
-            }
-            if (children.size() > 0) {
-                menu.setChildren(children);
-                setChildrenMenu(children, allMenuList);
-            }
         }
     }
 
@@ -90,9 +75,6 @@ public class AuthorityService {
             List<UserRole> userRoleList = authorityMapper.getUserRoleByUserid(user.getId());
             user.setUserRoleList(userRoleList);
             List<String> userRoleLists = new ArrayList<>();
-            for (UserRole userRole : userRoleList) {
-                userRoleLists.add(userRole.getRoleid());
-            }
             user.setUserRoleLists(userRoleLists);
         }
         return userList;
@@ -117,12 +99,6 @@ public class AuthorityService {
     public List<Department> getDepartmentTree() {
         List<Department> allDepartmentList = authorityMapper.getDepartmentAll();
         List<Department> topDepartmentList = new ArrayList<Department>();
-        //获取所有顶级部门
-        for (Department department : allDepartmentList) {
-            if (department.getMasterid() == null || "".equals(department.getMasterid())) {
-                topDepartmentList.add(department);
-            }
-        }
         setChildrenDepartment(topDepartmentList, allDepartmentList);
         return topDepartmentList;
     }
@@ -135,10 +111,6 @@ public class AuthorityService {
                 if (childDepartment.getMasterid() != null && department.getId().equals(childDepartment.getMasterid())) {
                     children.add(childDepartment);
                 }
-            }
-            if (children.size() > 0) {
-                department.setChildren(children);
-                setChildrenDepartment(children, allDepartmentList);
             }
         }
     }
