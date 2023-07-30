@@ -27,12 +27,12 @@
 
 如果你在安装过程中，或对项目有疑问，可以关注本人公众号获取本人联系方式进行咨询。<br>
 公众号内还有更多开源毕业设计供你选择。<br>
-<img src="https://xuezhabiji.com/images/gongzhonghao.jpg" width="200" height="200" />
+<img src="./images/gongzhonghao.jpg" width="200" height="200" />
 
 ## 毕设代做
 
 如果你需要毕设代做或者论文代写的需求，可以加我微信咨询，价格优惠，比淘宝代做便宜很多且安全。<br>
-<img src="https://xuezhabiji.com/images/my.jpg" width="200" height="300" />
+<img src="./images/my.jpg" width="200" height="300" />
 
 ## 技术栈
 
@@ -60,20 +60,20 @@
 ## 系统图片
 
 #### 1.登录页面
-<img src="https://xuezhabiji.com/images/program/examination/1.png" width="650" height="300" /><br>
+<img src="./images/1.png" width="650" height="300" /><br>
 #### 2.试题管理
-<img src="https://xuezhabiji.com/images/program/examination/2.png" width="650" height="300" /><br>
+<img src="./images/2.png" width="650" height="300" /><br>
 #### 3.添加试题
-<img src="https://xuezhabiji.com/images/program/examination/3.png" width="650" height="300" /><br>
+<img src="./images/3.png" width="650" height="300" /><br>
 #### 4.试卷编制
-<img src="https://xuezhabiji.com/images/program/examination/4.png" width="650" height="300" /><br>
+<img src="./images/4.png" width="650" height="300" /><br>
 #### 5.添加考试
-<img src="https://xuezhabiji.com/images/program/examination/5.png" width="650" height="300" /><br>
+<img src="./images/5.png" width="650" height="300" /><br>
 #### 6.参加考试
-<img src="https://xuezhabiji.com/images/program/examination/6.png" width="650" height="300" /><br>
+<img src="./images/6.png" width="650" height="300" /><br>
 #### 7.试卷批改
-<img src="https://xuezhabiji.com/images/program/examination/7.png" width="650" height="300" /><br>
-<img src="https://xuezhabiji.com/images/program/examination/8.png" width="650" height="300" /><br>
+<img src="./images/7.png" width="650" height="300" /><br>
+<img src="./images/8.png" width="650" height="300" /><br>
 #### 8.我的成绩
-<img src="https://xuezhabiji.com/images/program/examination/9.png" width="650" height="300" /><br>
-<img src="https://xuezhabiji.com/images/program/examination/10.png" width="650" height="300" /><br>
+<img src="./images/9.png" width="650" height="300" /><br>
+<img src="./images/10.png" width="650" height="300" /><br>
