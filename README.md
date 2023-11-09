@@ -6,14 +6,8 @@
 
 青云是一套麻雀虽小但五脏俱全的在线考试系统。<br>
 采用了目前主流的技术栈SpringBoot+Vue+ElementUI，并进行了前后端分离。<br>
-对于事务和锁都有应用，非常适合作为设计项目或开发学习。
+对于事务和锁都有应用，非常适合作为设计项目或开发学习。<br>
 视频介绍：<a href="https://www.bilibili.com/video/BV15c411A7kF/?spm_id_from=333.999.0.0" target="_blank">点击查看B站视频介绍</a>
-
-## 项目演示
-
-项目演示地址：http://xuezhabiji.com:5000 <br>
-账号:admin <br>
-密码:admin <br>
 
 ## 功能介绍
 
