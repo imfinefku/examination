@@ -54,19 +54,21 @@
 
 #### 1.登录页面
 <img src="./images/1.png" width="650" height="300" /><br>
-#### 2.试题管理
+#### 2.管理台
 <img src="./images/2.png" width="650" height="300" /><br>
-#### 3.添加试题
+#### 3.试题管理
 <img src="./images/3.png" width="650" height="300" /><br>
-#### 4.试卷编制
+#### 4.添加试题
 <img src="./images/4.png" width="650" height="300" /><br>
-#### 5.添加考试
+#### 5.试卷编制
 <img src="./images/5.png" width="650" height="300" /><br>
-#### 6.参加考试
+#### 6.添加考试
 <img src="./images/6.png" width="650" height="300" /><br>
-#### 7.试卷批改
+#### 7.参加考试
 <img src="./images/7.png" width="650" height="300" /><br>
+#### 8.试卷批改
 <img src="./images/8.png" width="650" height="300" /><br>
-#### 8.我的成绩
 <img src="./images/9.png" width="650" height="300" /><br>
+#### 9.我的成绩
 <img src="./images/10.png" width="650" height="300" /><br>
+<img src="./images/11.png" width="650" height="300" /><br>
